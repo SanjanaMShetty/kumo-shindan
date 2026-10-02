@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     log_tail_lines: int = 100
     max_tool_output_chars: int = 6000
 
-    db_path: str = "data/kubesleuth.db"
+    db_path: str = "data/kumoshindan.db"
     slack_webhook_url: str | None = None
     webhook_token: str | None = None
     alert_cooldown_seconds: int = 600

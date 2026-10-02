@@ -8,8 +8,8 @@ from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
-from kubesleuth.agent.graph import InvestigationResult
-from kubesleuth.config import settings
+from kumoshindan.agent.graph import InvestigationResult
+from kumoshindan.config import settings
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS investigations (

@@ -1,13 +1,13 @@
-"""Run one investigation: python -m kubesleuth.agent.cli --symptom '...'."""
+"""Run one investigation: python -m kumoshindan.agent.cli --symptom '...'."""
 
 import argparse
 
-from kubesleuth.agent.graph import investigate
+from kumoshindan.agent.graph import investigate
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--namespace", default="kubesleuth-lab")
+    parser.add_argument("--namespace", default="kumoshindan-lab")
     parser.add_argument("--symptom", required=True)
     args = parser.parse_args()
 

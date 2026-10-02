@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-frontend
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: web-frontend}
 spec:
   replicas: 1
@@ -22,7 +22,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-frontend
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
 spec:
   selector:
     app: web-front        # typo: should be web-frontend

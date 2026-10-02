@@ -23,9 +23,9 @@
         ],
         "suggested_fix": "Modify the pod's livenessProbe to use port 80 (or the correct port) and a valid path, then redeploy the updated configuration.",
         "fix_commands": [
-          "kubectl edit deployment session-store -n kubesleuth-lab",
+          "kubectl edit deployment session-store -n kumoshindan-lab",
           "Update the livenessProbe port to 80 or adjust the endpoint to match the application",
-          "kubectl rollout restart deployment/session-store -n kubesleuth-lab"
+          "kubectl rollout restart deployment/session-store -n kumoshindan-lab"
         ],
         "prevention": "Ensure liveness probes match the actual service ports and paths of the container, and test probes locally before applying.",
         "confidence": "high",
@@ -35,20 +35,20 @@
         {
           "name": "list_pods",
           "args": {
-            "namespace": "kubesleuth-lab"
+            "namespace": "kumoshindan-lab"
           }
         },
         {
           "name": "get_pod_status",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "session-store-85cd7b9bcd-bjwbf"
           }
         },
         {
           "name": "get_pod_events",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "session-store-85cd7b9bcd-bjwbf"
           }
         },
@@ -56,7 +56,7 @@
           "name": "get_pod_logs",
           "args": {
             "container": "store",
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "session-store-85cd7b9bcd-bjwbf"
           }
         }

@@ -21,9 +21,9 @@
         ],
         "suggested_fix": "Update the readinessProbe configuration to use the correct path and port that the application serves, or modify the application to expose the /healthz endpoint on port 80.",
         "fix_commands": [
-          "kubectl -n kubesleuth-lab edit deployment inventory-api",
-          "kubectl -n kubesleuth-lab set env deployment/inventory-api <add-correct-env-if-needed>",
-          "kubectl -n kubesleuth-lab patch pod inventory-api-6b79d85476-fbdmr -p '{\"spec\":{\"containers\":[{\"name\":\"api\",\"readinessProbe\":{\"httpGet\":{\"path\":\"/healthz\",\"port\":80},\"initialDelaySeconds\":5,\"periodSeconds\":10}}]}}'"
+          "kubectl -n kumoshindan-lab edit deployment inventory-api",
+          "kubectl -n kumoshindan-lab set env deployment/inventory-api <add-correct-env-if-needed>",
+          "kubectl -n kumoshindan-lab patch pod inventory-api-6b79d85476-fbdmr -p '{\"spec\":{\"containers\":[{\"name\":\"api\",\"readinessProbe\":{\"httpGet\":{\"path\":\"/healthz\",\"port\":80},\"initialDelaySeconds\":5,\"periodSeconds\":10}}]}}'"
         ],
         "prevention": "Add automated tests or CI checks that verify the health endpoint responds correctly before deploying, and ensure readiness probe configuration matches the container's actual listening port and path.",
         "confidence": "high",
@@ -33,27 +33,27 @@
         {
           "name": "list_pods",
           "args": {
-            "namespace": "kubesleuth-lab"
+            "namespace": "kumoshindan-lab"
           }
         },
         {
           "name": "get_pod_status",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "inventory-api-6b79d85476-fbdmr"
           }
         },
         {
           "name": "get_pod_events",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "inventory-api-6b79d85476-fbdmr"
           }
         },
         {
           "name": "get_service_endpoints",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "service_name": "inventory-api"
           }
         },
@@ -61,7 +61,7 @@
           "name": "get_pod_logs",
           "args": {
             "container": "api",
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "inventory-api-6b79d85476-fbdmr"
           }
         }

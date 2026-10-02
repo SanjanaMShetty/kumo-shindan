@@ -21,9 +21,9 @@
         ],
         "suggested_fix": "Update the Service's selector to match the pod's label (e.g., app=web-frontend) or add the expected label to the pod/deployment so that the Service can route traffic to the pod.",
         "fix_commands": [
-          "kubectl get pod web-frontend-5976bf4796-jkllk -n kubesleuth-lab --show-labels",
-          "kubectl edit service web-frontend -n kubesleuth-lab   # adjust selector to match pod labels",
-          "kubectl label pod web-frontend-5976bf4796-jkllk -n kubesleuth-lab app=web-front   # or update deployment template"
+          "kubectl get pod web-frontend-5976bf4796-jkllk -n kumoshindan-lab --show-labels",
+          "kubectl edit service web-frontend -n kumoshindan-lab   # adjust selector to match pod labels",
+          "kubectl label pod web-frontend-5976bf4796-jkllk -n kumoshindan-lab app=web-front   # or update deployment template"
         ],
         "prevention": "Adopt a naming convention and verify that Service selectors correspond to pod/deployment labels before deployment, possibly using CI linting or kubectl dry-run validation.",
         "confidence": "high",
@@ -33,27 +33,27 @@
         {
           "name": "list_pods",
           "args": {
-            "namespace": "kubesleuth-lab"
+            "namespace": "kumoshindan-lab"
           }
         },
         {
           "name": "get_service_endpoints",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "service_name": "web-frontend"
           }
         },
         {
           "name": "get_pod_events",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "web-frontend-5976bf4796-jkllk"
           }
         },
         {
           "name": "get_pod_status",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "web-frontend-5976bf4796-jkllk"
           }
         }

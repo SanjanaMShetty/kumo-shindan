@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: crash-loop-demo
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels:
     app: crash-loop-demo
 spec:
@@ -19,4 +19,4 @@ spec:
         - name: demo
           image: busybox:1.36
           command: ["/bin/sh", "-c"]
-          args: ["echo 'KubeSleuth demo: intentional crash'; sleep 2; exit 1"]
+          args: ["echo 'KumoShindan demo: intentional crash'; sleep 2; exit 1"]

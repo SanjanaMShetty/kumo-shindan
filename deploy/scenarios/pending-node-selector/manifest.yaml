@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: analytics-ui
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: analytics-ui}
 spec:
   replicas: 1

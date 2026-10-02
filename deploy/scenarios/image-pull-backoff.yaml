@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: kubesleuth-lab
+  name: kumoshindan-lab
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: broken-image
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels:
     app: broken-image
 spec:
@@ -22,4 +22,4 @@ spec:
     spec:
       containers:
         - name: app
-          image: kubesleuth-does-not-exist.invalid/demo:missing
+          image: kumoshindan-does-not-exist.invalid/demo:missing

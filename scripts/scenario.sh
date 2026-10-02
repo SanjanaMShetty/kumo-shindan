@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-namespace="kubesleuth-lab"
+namespace="kumoshindan-lab"
 command="${1:-}"
 scenario="${2:-}"
 

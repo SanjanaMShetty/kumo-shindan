@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: notifications-svc
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: notifications-svc}
 spec:
   replicas: 1

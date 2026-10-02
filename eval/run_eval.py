@@ -7,8 +7,8 @@ from pathlib import Path
 
 import yaml
 
-from kubesleuth.agent.graph import investigate
-from kubesleuth.config import settings
+from kumoshindan.agent.graph import investigate
+from kumoshindan.config import settings
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_FILE = ROOT / "eval" / "expected.yaml"

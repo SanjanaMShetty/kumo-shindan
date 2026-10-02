@@ -2,7 +2,7 @@
 
 from langchain_openai import ChatOpenAI
 
-from kubesleuth.config import settings
+from kumoshindan.config import settings
 
 
 def get_llm() -> ChatOpenAI:

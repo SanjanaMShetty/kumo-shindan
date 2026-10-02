@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: checkout-api
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: checkout-api}
 spec:
   replicas: 1

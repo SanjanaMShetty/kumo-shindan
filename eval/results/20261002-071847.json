@@ -23,7 +23,7 @@
         "fix_commands": [
           "kubectl get storageclass",
           "kubectl create storageclass fast-ssd-nonexistent --provisioner=<provisioner> --type=ssd --allow-volume-expansion=true",
-          "kubectl patch pvc uploads-data -n kubesleuth-lab -p '{\"spec\":{\"storageClassName\":\"<existing\u2011class>\"}}'"
+          "kubectl patch pvc uploads-data -n kumoshindan-lab -p '{\"spec\":{\"storageClassName\":\"<existing\u2011class>\"}}'"
         ],
         "prevention": "Validate that any StorageClass referenced by PersistentVolumeClaims exists in the cluster before deploying workloads, possibly using admission controllers or CI checks.",
         "confidence": "high",
@@ -33,27 +33,27 @@
         {
           "name": "list_pods",
           "args": {
-            "namespace": "kubesleuth-lab"
+            "namespace": "kumoshindan-lab"
           }
         },
         {
           "name": "get_pod_status",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "uploads-service-7db6c67b89-p2rzn"
           }
         },
         {
           "name": "get_pod_events",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "uploads-service-7db6c67b89-p2rzn"
           }
         },
         {
           "name": "get_pvc_status",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pvc_name": "uploads-data"
           }
         }

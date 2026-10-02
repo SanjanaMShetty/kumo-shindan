@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: payments-web
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: payments-web}
 spec:
   replicas: 1

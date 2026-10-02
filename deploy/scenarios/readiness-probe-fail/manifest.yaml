@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inventory-api
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: inventory-api}
 spec:
   replicas: 1

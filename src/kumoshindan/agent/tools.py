@@ -5,8 +5,8 @@ import json
 from kubernetes.client.exceptions import ApiException
 from langchain_core.tools import tool
 
-from kubesleuth import k8s_tools
-from kubesleuth.config import settings
+from kumoshindan import k8s_tools
+from kumoshindan.config import settings
 
 
 def _check_namespace(namespace: str) -> None:

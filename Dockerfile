@@ -8,11 +8,11 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     HOME=/tmp \
-    DB_PATH=/data/kubesleuth.db
+    DB_PATH=/data/kumoshindan.db
 COPY --from=build /install /usr/local
 RUN useradd --system --uid 10001 --no-create-home app \
     && mkdir -p /data \
     && chown 10001:10001 /data
 USER 10001
 EXPOSE 8000
-CMD ["uvicorn", "kubesleuth.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "kumoshindan.api.main:app", "--host", "0.0.0.0", "--port", "8000"]

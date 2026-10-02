@@ -1,12 +1,12 @@
 image:
-  repository: kubesleuth
+  repository: kumoshindan
   tag: "0.1.0"
   pullPolicy: IfNotPresent
 
 allowedNamespaces:
-  - kubesleuth-lab
+  - kumoshindan-lab
 
-existingSecret: kubesleuth-llm
+existingSecret: kumoshindan-llm
 
 persistence:
   size: 1Gi

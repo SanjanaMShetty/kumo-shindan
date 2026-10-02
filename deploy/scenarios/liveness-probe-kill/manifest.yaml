@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: session-store
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: session-store}
 spec:
   replicas: 1

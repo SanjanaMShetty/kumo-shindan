@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: report-worker
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: report-worker}
 spec:
   replicas: 1

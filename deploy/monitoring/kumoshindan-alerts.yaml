@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kubesleuth-lab-alerts
+  name: kumoshindan-lab-alerts
   namespace: monitoring
   labels:
     release: kube-prometheus-stack
@@ -12,7 +12,7 @@ spec:
         - alert: KumoShindanImagePullBackOff
           expr: |
             kube_pod_container_status_waiting_reason{
-              namespace="kubesleuth-lab",
+              namespace="kumoshindan-lab",
               reason="ImagePullBackOff"
             } == 1
           for: 30s
@@ -25,7 +25,7 @@ spec:
         - alert: KumoShindanPodCrashLooping
           expr: |
             increase(kube_pod_container_status_restarts_total{
-              namespace="kubesleuth-lab"
+              namespace="kumoshindan-lab"
             }[5m]) >= 2
           for: 1m
           labels:
@@ -37,7 +37,7 @@ spec:
         - alert: KumoShindanContainerStartupFailure
           expr: |
             kube_pod_container_status_waiting_reason{
-              namespace="kubesleuth-lab",
+              namespace="kumoshindan-lab",
               reason=~"ErrImagePull|CreateContainerConfigError|InvalidImageName"
             } == 1
           for: 30s
@@ -50,7 +50,7 @@ spec:
         - alert: KumoShindanPodPending
           expr: |
             kube_pod_status_phase{
-              namespace="kubesleuth-lab",
+              namespace="kumoshindan-lab",
               phase="Pending"
             } == 1
           for: 2m
@@ -63,12 +63,12 @@ spec:
         - alert: KumoShindanPodRunningNotReady
           expr: |
             kube_pod_status_ready{
-              namespace="kubesleuth-lab",
+              namespace="kumoshindan-lab",
               condition="false"
             } == 1
             and on(namespace,pod)
             kube_pod_status_phase{
-              namespace="kubesleuth-lab",
+              namespace="kumoshindan-lab",
               phase="Running"
             } == 1
           for: 2m
@@ -81,7 +81,7 @@ spec:
         - alert: KumoShindanPVCBindingPending
           expr: |
             kube_persistentvolumeclaim_status_phase{
-              namespace="kubesleuth-lab",
+              namespace="kumoshindan-lab",
               phase="Pending"
             } == 1
           for: 2m

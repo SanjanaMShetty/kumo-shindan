@@ -13,17 +13,17 @@
       "tokens_out": 1399,
       "report": {
         "category": "MISSING_CONFIG_RESOURCE",
-        "root_cause": "The pod references a ConfigMap named \"app-config\" that does not exist in the kubesleuth-lab namespace.",
+        "root_cause": "The pod references a ConfigMap named \"app-config\" that does not exist in the kumoshindan-lab namespace.",
         "evidence": [
           "Pod notifications-svc-7bbcb74877-nvprt state: waiting, reason: CreateContainerConfigError, message: configmap \"app-config\" not found",
           "Event Warning reason: Failed, message: Error: configmap \"app-config\" not found (count 4)",
           "Container image pulled successfully, indicating the issue is not image related"
         ],
-        "suggested_fix": "Create the missing ConfigMap \"app-config\" in the kubesleuth-lab namespace with the required data, then redeploy or restart the notifications-svc pod so it can mount the ConfigMap and start successfully.",
+        "suggested_fix": "Create the missing ConfigMap \"app-config\" in the kumoshindan-lab namespace with the required data, then redeploy or restart the notifications-svc pod so it can mount the ConfigMap and start successfully.",
         "fix_commands": [
-          "kubectl get configmap app-config -n kubesleuth-lab",
-          "kubectl create configmap app-config --from-file=path/to/config -n kubesleuth-lab",
-          "kubectl describe pod notifications-svc-7bbcb74877-nvprt -n kubesleuth-lab"
+          "kubectl get configmap app-config -n kumoshindan-lab",
+          "kubectl create configmap app-config --from-file=path/to/config -n kumoshindan-lab",
+          "kubectl describe pod notifications-svc-7bbcb74877-nvprt -n kumoshindan-lab"
         ],
         "prevention": "Include ConfigMap creation as part of deployment manifests or Helm charts, and use CI checks to verify referenced ConfigMaps exist before applying.",
         "confidence": "high",
@@ -33,13 +33,13 @@
         {
           "name": "list_pods",
           "args": {
-            "namespace": "kubesleuth-lab"
+            "namespace": "kumoshindan-lab"
           }
         },
         {
           "name": "get_pod_events",
           "args": {
-            "namespace": "kubesleuth-lab",
+            "namespace": "kumoshindan-lab",
             "pod_name": "notifications-svc-7bbcb74877-nvprt"
           }
         }

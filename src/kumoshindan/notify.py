@@ -4,8 +4,8 @@ import logging
 
 import httpx
 
-from kubesleuth.agent.report import IncidentReport
-from kubesleuth.config import settings
+from kumoshindan.agent.report import IncidentReport
+from kumoshindan.config import settings
 
 log = logging.getLogger(__name__)
 

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: uploads-data
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
 spec:
   accessModes: ["ReadWriteOnce"]
   storageClassName: fast-ssd-nonexistent
@@ -14,7 +14,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: uploads-service
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: uploads-service}
 spec:
   replicas: 1

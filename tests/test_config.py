@@ -1,4 +1,4 @@
-from kubesleuth.config import Settings
+from kumoshindan.config import Settings
 
 
 def test_namespaces_are_parsed_and_trimmed():

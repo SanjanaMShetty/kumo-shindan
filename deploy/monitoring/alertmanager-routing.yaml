@@ -9,12 +9,12 @@ alertmanager:
       group_interval: 1m
       repeat_interval: 12h
       routes:
-        - receiver: kubesleuth
+        - receiver: kumoshindan
           matchers:
-            - 'namespace="kubesleuth-lab"'
+            - 'namespace="kumoshindan-lab"'
     receivers:
       - name: "null"
-      - name: kubesleuth
+      - name: kumoshindan
         webhook_configs:
-          - url: http://kubesleuth.kubesleuth.svc.cluster.local:8000/webhook/alertmanager
+          - url: http://kumoshindan.kumoshindan.svc.cluster.local:8000/webhook/alertmanager
             send_resolved: false

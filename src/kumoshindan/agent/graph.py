@@ -12,11 +12,11 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
 
-from kubesleuth.agent.llm import get_llm
-from kubesleuth.agent.prompts import REPORT_SYSTEM, SYSTEM_PROMPT
-from kubesleuth.agent.report import IncidentReport
-from kubesleuth.agent.tools import ALL_TOOLS
-from kubesleuth.config import settings
+from kumoshindan.agent.llm import get_llm
+from kumoshindan.agent.prompts import REPORT_SYSTEM, SYSTEM_PROMPT
+from kumoshindan.agent.report import IncidentReport
+from kumoshindan.agent.tools import ALL_TOOLS
+from kumoshindan.config import settings
 
 
 class AgentState(TypedDict):

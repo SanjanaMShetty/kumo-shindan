@@ -9,10 +9,10 @@ from contextlib import asynccontextmanager
 from fastapi import BackgroundTasks, FastAPI, Header, HTTPException, Response
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 
-from kubesleuth import metrics, notify, storage
-from kubesleuth.agent.graph import investigate
-from kubesleuth.api.schemas import AlertmanagerPayload, InvestigateRequest
-from kubesleuth.config import settings
+from kumoshindan import metrics, notify, storage
+from kumoshindan.agent.graph import investigate
+from kumoshindan.api.schemas import AlertmanagerPayload, InvestigateRequest
+from kumoshindan.config import settings
 
 log = logging.getLogger("kumoshindan.api")
 

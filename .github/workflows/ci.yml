@@ -40,12 +40,12 @@ jobs:
       - uses: azure/setup-helm@v5
 
       - name: Lint Helm chart
-        run: helm lint deploy/helm/kubesleuth
+        run: helm lint deploy/helm/kumoshindan
 
       - name: Render Helm chart
         run: |
-          helm template kubesleuth deploy/helm/kubesleuth \
-            --namespace kubesleuth \
+          helm template kumoshindan deploy/helm/kumoshindan \
+            --namespace kumoshindan \
             --api-versions monitoring.coreos.com/v1 > /dev/null
 
   publish-image:

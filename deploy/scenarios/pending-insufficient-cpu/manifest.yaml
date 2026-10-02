@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: batch-processor
-  namespace: kubesleuth-lab
+  namespace: kumoshindan-lab
   labels: {app: batch-processor}
 spec:
   replicas: 1
