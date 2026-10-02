@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-ui
+  namespace: kubesleuth-lab
+  labels: {app: analytics-ui}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: analytics-ui}
+  template:
+    metadata:
+      labels: {app: analytics-ui}
+    spec:
+      nodeSelector:
+        disktype: ssd
+      containers:
+        - name: ui
+          image: nginx:1.27

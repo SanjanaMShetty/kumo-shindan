@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-svc
+  namespace: kubesleuth-lab
+  labels: {app: notifications-svc}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: notifications-svc}
+  template:
+    metadata:
+      labels: {app: notifications-svc}
+    spec:
+      containers:
+        - name: svc
+          image: nginx:1.27
+          env:
+            - name: SMTP_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: smtp_host

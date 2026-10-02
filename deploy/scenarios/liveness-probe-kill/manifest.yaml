@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session-store
+  namespace: kubesleuth-lab
+  labels: {app: session-store}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: session-store}
+  template:
+    metadata:
+      labels: {app: session-store}
+    spec:
+      containers:
+        - name: store
+          image: nginx:1.27
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080          # nginx listens on 80, not 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 2

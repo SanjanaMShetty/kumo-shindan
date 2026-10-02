@@ -1,6 +1,6 @@
 apiVersion: v2
-name: kubesleuth
-description: Read-only LangGraph agent for Kubernetes incident investigation
+name: kumoshindan
+description: "KumoShindan: read-only AI assistant for Kubernetes incident investigation"
 type: application
 version: 0.1.0
 appVersion: "0.1.0"

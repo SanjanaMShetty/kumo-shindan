@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kumoshindan-dashboard
+  labels:
+    grafana_dashboard: "1"
+data:
+  kumoshindan-overview.json: |-
+{{ .Files.Get "dashboards/kumoshindan-overview.json" | indent 4 }}

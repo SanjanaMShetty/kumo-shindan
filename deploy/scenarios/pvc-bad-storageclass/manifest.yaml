@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uploads-data
+  namespace: kubesleuth-lab
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: fast-ssd-nonexistent
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uploads-service
+  namespace: kubesleuth-lab
+  labels: {app: uploads-service}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: uploads-service}
+  template:
+    metadata:
+      labels: {app: uploads-service}
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.27
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: uploads-data

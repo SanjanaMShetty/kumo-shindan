@@ -1,0 +1,65 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:20:59.602777+00:00",
+  "rows": [
+    {
+      "scenario": "service-selector-mismatch",
+      "expected": "SERVICE_SELECTOR",
+      "got": "SERVICE_SELECTOR",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 7.0,
+      "tokens_in": 6441,
+      "tokens_out": 1875,
+      "report": {
+        "category": "SERVICE_SELECTOR",
+        "root_cause": "The Service selector does not match any pod labels, resulting in no endpoints for the service.",
+        "evidence": [
+          "Service 'web-frontend' selector: {\"app\": \"web-front\"}",
+          "Service endpoints: ready_endpoints: [], not_ready_endpoints: []",
+          "Pod 'web-frontend-5976bf4796-jkllk' is Running with container ready, but no label information matching the selector is shown."
+        ],
+        "suggested_fix": "Update the Service's selector to match the pod's label (e.g., app=web-frontend) or add the expected label to the pod/deployment so that the Service can route traffic to the pod.",
+        "fix_commands": [
+          "kubectl get pod web-frontend-5976bf4796-jkllk -n kubesleuth-lab --show-labels",
+          "kubectl edit service web-frontend -n kubesleuth-lab   # adjust selector to match pod labels",
+          "kubectl label pod web-frontend-5976bf4796-jkllk -n kubesleuth-lab app=web-front   # or update deployment template"
+        ],
+        "prevention": "Adopt a naming convention and verify that Service selectors correspond to pod/deployment labels before deployment, possibly using CI linting or kubectl dry-run validation.",
+        "confidence": "high",
+        "confidence_reason": "The service's selector (app=web-front) does not match any pod labels, as evidenced by the empty ready_endpoints list despite the pod being in Running state."
+      },
+      "tool_calls": [
+        {
+          "name": "list_pods",
+          "args": {
+            "namespace": "kubesleuth-lab"
+          }
+        },
+        {
+          "name": "get_service_endpoints",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "service_name": "web-frontend"
+          }
+        },
+        {
+          "name": "get_pod_events",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "web-frontend-5976bf4796-jkllk"
+          }
+        },
+        {
+          "name": "get_pod_status",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "web-frontend-5976bf4796-jkllk"
+          }
+        }
+      ],
+      "steps": 5,
+      "error": null
+    }
+  ]
+}

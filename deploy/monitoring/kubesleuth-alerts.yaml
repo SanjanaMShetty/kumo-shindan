@@ -7,9 +7,9 @@ metadata:
     release: kube-prometheus-stack
 spec:
   groups:
-    - name: kubesleuth.lab
+    - name: kumoshindan.lab
       rules:
-        - alert: KubeSleuthImagePullBackOff
+        - alert: KumoShindanImagePullBackOff
           expr: |
             kube_pod_container_status_waiting_reason{
               namespace="kubesleuth-lab",
@@ -21,3 +21,72 @@ spec:
           annotations:
             summary: "Pod {{ $labels.pod }} cannot pull its image"
             description: "Container {{ $labels.container }} in namespace {{ $labels.namespace }} is in ImagePullBackOff."
+
+        - alert: KumoShindanPodCrashLooping
+          expr: |
+            increase(kube_pod_container_status_restarts_total{
+              namespace="kubesleuth-lab"
+            }[5m]) >= 2
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.pod }} is restarting repeatedly"
+            description: "Container {{ $labels.container }} has restarted repeatedly in namespace {{ $labels.namespace }}."
+
+        - alert: KumoShindanContainerStartupFailure
+          expr: |
+            kube_pod_container_status_waiting_reason{
+              namespace="kubesleuth-lab",
+              reason=~"ErrImagePull|CreateContainerConfigError|InvalidImageName"
+            } == 1
+          for: 30s
+          labels:
+            severity: warning
+          annotations:
+            summary: "Container {{ $labels.container }} cannot start in pod {{ $labels.pod }}"
+            description: "The container is waiting with reason {{ $labels.reason }}."
+
+        - alert: KumoShindanPodPending
+          expr: |
+            kube_pod_status_phase{
+              namespace="kubesleuth-lab",
+              phase="Pending"
+            } == 1
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.pod }} has been Pending"
+            description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} has remained Pending for over two minutes."
+
+        - alert: KumoShindanPodRunningNotReady
+          expr: |
+            kube_pod_status_ready{
+              namespace="kubesleuth-lab",
+              condition="false"
+            } == 1
+            and on(namespace,pod)
+            kube_pod_status_phase{
+              namespace="kubesleuth-lab",
+              phase="Running"
+            } == 1
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Running pod {{ $labels.pod }} is not Ready"
+            description: "Pod {{ $labels.pod }} is running but has not become Ready."
+
+        - alert: KumoShindanPVCBindingPending
+          expr: |
+            kube_persistentvolumeclaim_status_phase{
+              namespace="kubesleuth-lab",
+              phase="Pending"
+            } == 1
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "PVC {{ $labels.persistentvolumeclaim }} is Pending"
+            description: "The claim has remained Pending in namespace {{ $labels.namespace }}."

@@ -22,4 +22,4 @@ resources:
 # Enable this after the application exposes /metrics in Stage 10.
 metrics:
   serviceMonitor:
-    enabled: false
+    enabled: true

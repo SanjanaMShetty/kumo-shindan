@@ -1,0 +1,17 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:09:07.733606+00:00",
+  "rows": [
+    {
+      "scenario": "pending-node-selector",
+      "expected": "SCHEDULING_CONSTRAINT",
+      "got": "SCHEDULING_CONSTRAINT",
+      "category_ok": true,
+      "keyword_ok": false,
+      "duration_s": 8.1,
+      "tokens_in": 3833,
+      "tokens_out": 1736,
+      "error": null
+    }
+  ]
+}

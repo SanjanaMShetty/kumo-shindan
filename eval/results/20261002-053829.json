@@ -1,0 +1,17 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T05:38:29.544349+00:00",
+  "rows": [
+    {
+      "scenario": "image-pull-backoff",
+      "expected": "IMAGE_PULL",
+      "got": "IMAGE_PULL",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 6.2,
+      "tokens_in": 3843,
+      "tokens_out": 1775,
+      "error": null
+    }
+  ]
+}

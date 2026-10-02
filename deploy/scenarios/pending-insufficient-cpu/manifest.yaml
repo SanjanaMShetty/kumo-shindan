@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: batch-processor
+  namespace: kubesleuth-lab
+  labels: {app: batch-processor}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: batch-processor}
+  template:
+    metadata:
+      labels: {app: batch-processor}
+    spec:
+      containers:
+        - name: proc
+          image: nginx:1.27
+          resources:
+            requests: {cpu: "64"}

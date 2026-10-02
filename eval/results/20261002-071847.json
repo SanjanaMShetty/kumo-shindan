@@ -1,0 +1,65 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:18:47.922431+00:00",
+  "rows": [
+    {
+      "scenario": "pvc-bad-storageclass",
+      "expected": "STORAGE",
+      "got": "STORAGE",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 7.0,
+      "tokens_in": 5501,
+      "tokens_out": 1694,
+      "report": {
+        "category": "STORAGE",
+        "root_cause": "The PersistentVolumeClaim \"uploads-data\" references a StorageClass \"fast-ssd-nonexistent\" that does not exist, preventing volume provisioning and pod scheduling.",
+        "evidence": [
+          "Pod event: FailedScheduling \u2013 pod has unbound immediate PersistentVolumeClaims. not found",
+          "PVC status phase: Pending, storage_class: fast-ssd-nonexistent",
+          "PVC events: ProvisioningFailed \u2013 storageclass.storage.k8s.io \"fast-ssd-nonexistent\" not found (multiple occurrences)"
+        ],
+        "suggested_fix": "Create the missing StorageClass with the expected name or update the PVC to use an existing StorageClass, then delete the pending pod so it can be recreated and bound to a volume.",
+        "fix_commands": [
+          "kubectl get storageclass",
+          "kubectl create storageclass fast-ssd-nonexistent --provisioner=<provisioner> --type=ssd --allow-volume-expansion=true",
+          "kubectl patch pvc uploads-data -n kubesleuth-lab -p '{\"spec\":{\"storageClassName\":\"<existing\u2011class>\"}}'"
+        ],
+        "prevention": "Validate that any StorageClass referenced by PersistentVolumeClaims exists in the cluster before deploying workloads, possibly using admission controllers or CI checks.",
+        "confidence": "high",
+        "confidence_reason": "The pod cannot be scheduled because its PersistentVolumeClaim references a non\u2011existent StorageClass, as shown by explicit ProvisioningFailed events and the PVC status."
+      },
+      "tool_calls": [
+        {
+          "name": "list_pods",
+          "args": {
+            "namespace": "kubesleuth-lab"
+          }
+        },
+        {
+          "name": "get_pod_status",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "uploads-service-7db6c67b89-p2rzn"
+          }
+        },
+        {
+          "name": "get_pod_events",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "uploads-service-7db6c67b89-p2rzn"
+          }
+        },
+        {
+          "name": "get_pvc_status",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pvc_name": "uploads-data"
+          }
+        }
+      ],
+      "steps": 5,
+      "error": null
+    }
+  ]
+}

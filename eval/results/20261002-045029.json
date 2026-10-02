@@ -1,0 +1,17 @@
+{
+  "model": "openai:openrouter/free",
+  "date": "2026-10-02T04:50:29.424334+00:00",
+  "rows": [
+    {
+      "scenario": "crash-loop",
+      "expected": "APPLICATION_CRASH",
+      "got": null,
+      "category_ok": false,
+      "keyword_ok": false,
+      "duration_s": 1.0,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "error": "OpenAIRateLimitError: Error code: 429 - {'error': {'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day', 'code': 429, 'metadata': {'headers': {'X-RateLimit-Limit': '50', 'X-RateLimit-Remaining': '0', 'X-RateLimit-Reset': '1790985600000'}, 'limit_source': 'openrouter_free_tier_daily', 'remedy_hint': 'Wait for the daily reset (see X-RateLimit-Reset), or purchase credits to raise your free-model daily limit.', 'provider_name': None, 'previous_errors': [{'code': 429, 'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day'}, {'code': 429, 'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day'}, {'code': 429, 'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day'}, {'code': 429, 'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day'}, {'code': 429, 'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day'}, {'code': 429, 'message': 'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day'}]}}, 'user_id': 'user_3K5F3yZpkk94iq56PcDiCeQT1rY'}"
+    }
+  ]
+}

@@ -15,7 +15,7 @@ def post_to_slack(namespace: str, symptom: str, report: IncidentReport) -> None:
         return
 
     text = (
-        f":mag: *KubeSleuth investigation* (namespace `{namespace}`)\n"
+        f":mag: *KumoShindan investigation* (namespace `{namespace}`)\n"
         f"*Symptom:* {symptom}\n"
         f"*Category:* `{report.category}`  *Confidence:* {report.confidence}\n"
         f"*Root cause:* {report.root_cause}\n"

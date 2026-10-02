@@ -1,0 +1,73 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:21:54.342474+00:00",
+  "rows": [
+    {
+      "scenario": "readiness-probe-fail",
+      "expected": "READINESS_PROBE",
+      "got": "READINESS_PROBE",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 5.4,
+      "tokens_in": 6867,
+      "tokens_out": 957,
+      "report": {
+        "category": "READINESS_PROBE",
+        "root_cause": "The readiness probe is misconfigured or the application does not expose the expected health endpoint, causing the pod to remain NotReady.",
+        "evidence": [
+          "Pod condition Ready = False, reason ContainersNotReady",
+          "Readiness probe failed: Get \"http://10.244.1.22:80/healthz\": dial tcp 10.244.1.22:80: connect: connection refused",
+          "Readiness probe failed: HTTP probe failed with statuscode: 404"
+        ],
+        "suggested_fix": "Update the readinessProbe configuration to use the correct path and port that the application serves, or modify the application to expose the /healthz endpoint on port 80.",
+        "fix_commands": [
+          "kubectl -n kubesleuth-lab edit deployment inventory-api",
+          "kubectl -n kubesleuth-lab set env deployment/inventory-api <add-correct-env-if-needed>",
+          "kubectl -n kubesleuth-lab patch pod inventory-api-6b79d85476-fbdmr -p '{\"spec\":{\"containers\":[{\"name\":\"api\",\"readinessProbe\":{\"httpGet\":{\"path\":\"/healthz\",\"port\":80},\"initialDelaySeconds\":5,\"periodSeconds\":10}}]}}'"
+        ],
+        "prevention": "Add automated tests or CI checks that verify the health endpoint responds correctly before deploying, and ensure readiness probe configuration matches the container's actual listening port and path.",
+        "confidence": "high",
+        "confidence_reason": "Events explicitly report readiness probe failures (connection refused and HTTP 404) and the pod's Ready condition is False due to ContainersNotReady, indicating the probe is the direct cause of the pod not receiving traffic."
+      },
+      "tool_calls": [
+        {
+          "name": "list_pods",
+          "args": {
+            "namespace": "kubesleuth-lab"
+          }
+        },
+        {
+          "name": "get_pod_status",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "inventory-api-6b79d85476-fbdmr"
+          }
+        },
+        {
+          "name": "get_pod_events",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "inventory-api-6b79d85476-fbdmr"
+          }
+        },
+        {
+          "name": "get_service_endpoints",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "service_name": "inventory-api"
+          }
+        },
+        {
+          "name": "get_pod_logs",
+          "args": {
+            "container": "api",
+            "namespace": "kubesleuth-lab",
+            "pod_name": "inventory-api-6b79d85476-fbdmr"
+          }
+        }
+      ],
+      "steps": 5,
+      "error": null
+    }
+  ]
+}

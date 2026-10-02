@@ -1,0 +1,17 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T05:35:27.054744+00:00",
+  "rows": [
+    {
+      "scenario": "crash-loop",
+      "expected": "APPLICATION_CRASH",
+      "got": "APPLICATION_CRASH",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 14.4,
+      "tokens_in": 7160,
+      "tokens_out": 1844,
+      "error": null
+    }
+  ]
+}

@@ -83,7 +83,24 @@ def build_graph():
                 )
             ),
         ]
-        return {"report": report_llm.invoke(prompt)}
+        report = report_llm.invoke(prompt)
+        if report is None:
+            retry_prompt = prompt + [
+                HumanMessage(
+                    content=(
+                        "The previous attempt returned no structured report. "
+                        "Return a valid IncidentReport now. Use UNKNOWN if the "
+                        "evidence does not fit another allowed category."
+                    )
+                )
+            ]
+            report = report_llm.invoke(retry_prompt)
+
+        if report is None:
+            raise RuntimeError("The model returned no structured IncidentReport after one retry.")
+        if isinstance(report, dict):
+            report = IncidentReport.model_validate(report)
+        return {"report": report}
 
     graph = StateGraph(AgentState)
     graph.add_node("triage", triage)

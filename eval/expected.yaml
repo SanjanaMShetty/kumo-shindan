@@ -1,0 +1,85 @@
+- name: crashloop-missing-env
+  symptom: Users report the checkout-api service is failing. It is deployed in the
+    kubesleuth-lab namespace.
+  category: MISSING_ENV_VAR
+  must_mention_any:
+  - DATABASE_URL
+  settle_seconds: 75
+  namespace: kubesleuth-lab
+- name: imagepull-bad-tag
+  symptom: The payments-web deployment in the kubesleuth-lab namespace has no running
+    pods.
+  category: IMAGE_PULL
+  must_mention_any:
+  - 1.99.99
+  settle_seconds: 45
+  namespace: kubesleuth-lab
+- name: oomkilled
+  symptom: The report-worker pod in the kubesleuth-lab namespace keeps restarting.
+  category: OOM_KILLED
+  must_mention_any:
+  - OOMKilled
+  - '137'
+  - memory
+  settle_seconds: 75
+  namespace: kubesleuth-lab
+- name: pending-insufficient-cpu
+  symptom: The batch-processor deployment in the kubesleuth-lab namespace never starts.
+  category: INSUFFICIENT_RESOURCES
+  must_mention_any:
+  - cpu
+  settle_seconds: 30
+  namespace: kubesleuth-lab
+- name: pending-node-selector
+  symptom: The analytics-ui pod in the kubesleuth-lab namespace is stuck and never
+    runs.
+  category: SCHEDULING_CONSTRAINT
+  must_mention_any:
+  - disktype
+  - node selector
+  - nodeselector
+  settle_seconds: 30
+  namespace: kubesleuth-lab
+- name: pvc-bad-storageclass
+  symptom: The uploads-service pod in the kubesleuth-lab namespace is not starting.
+  category: STORAGE
+  must_mention_any:
+  - fast-ssd-nonexistent
+  - storageclass
+  settle_seconds: 30
+  namespace: kubesleuth-lab
+- name: service-selector-mismatch
+  symptom: Requests to the web-frontend service in the kubesleuth-lab namespace fail
+    even though its pod is running.
+  category: SERVICE_SELECTOR
+  must_mention_any:
+  - selector
+  - web-front
+  settle_seconds: 30
+  namespace: kubesleuth-lab
+- name: readiness-probe-fail
+  symptom: The inventory-api pod in the kubesleuth-lab namespace is running but never
+    receives traffic.
+  category: READINESS_PROBE
+  must_mention_any:
+  - /healthz
+  - readiness
+  - '404'
+  settle_seconds: 45
+  namespace: kubesleuth-lab
+- name: liveness-probe-kill
+  symptom: The session-store pod in the kubesleuth-lab namespace keeps restarting.
+  category: LIVENESS_PROBE
+  must_mention_any:
+  - liveness
+  - '8080'
+  settle_seconds: 75
+  namespace: kubesleuth-lab
+- name: missing-configmap
+  symptom: The notifications-svc pod in the kubesleuth-lab namespace cannot start.
+  category: MISSING_CONFIG_RESOURCE
+  must_mention_any:
+  - app-config
+  - configmap
+  settle_seconds: 30
+  namespace: kubesleuth-lab

@@ -1,0 +1,68 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:26:52.544375+00:00",
+  "rows": [
+    {
+      "scenario": "liveness-probe-kill",
+      "expected": "LIVENESS_PROBE",
+      "got": "LIVENESS_PROBE",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 21.5,
+      "tokens_in": 9783,
+      "tokens_out": 1688,
+      "report": {
+        "category": "LIVENESS_PROBE",
+        "root_cause": "The liveness probe is targeting port 8080, but the nginx container listens on port 80, causing connection refusals and pod restarts.",
+        "evidence": [
+          "Warning event: Liveness probe failed: Get \"http://10.244.1.24:8080/health\": dial tcp 10.244.1.24:8080: connect: connection refused",
+          "Normal event: Killing - Container store failed liveness probe, will be restarted",
+          "Warning event: BackOff restarting failed container store",
+          "Pod status shows restart_count 4 but container is ready and running",
+          "Container image nginx:1.27 is pulled successfully and starts without error in logs"
+        ],
+        "suggested_fix": "Modify the pod's livenessProbe to use port 80 (or the correct port) and a valid path, then redeploy the updated configuration.",
+        "fix_commands": [
+          "kubectl edit deployment session-store -n kubesleuth-lab",
+          "Update the livenessProbe port to 80 or adjust the endpoint to match the application",
+          "kubectl rollout restart deployment/session-store -n kubesleuth-lab"
+        ],
+        "prevention": "Ensure liveness probes match the actual service ports and paths of the container, and test probes locally before applying.",
+        "confidence": "high",
+        "confidence_reason": "Pod events explicitly report liveness probe failures and subsequent container restarts, and the pod is otherwise Running with ready containers."
+      },
+      "tool_calls": [
+        {
+          "name": "list_pods",
+          "args": {
+            "namespace": "kubesleuth-lab"
+          }
+        },
+        {
+          "name": "get_pod_status",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "session-store-85cd7b9bcd-bjwbf"
+          }
+        },
+        {
+          "name": "get_pod_events",
+          "args": {
+            "namespace": "kubesleuth-lab",
+            "pod_name": "session-store-85cd7b9bcd-bjwbf"
+          }
+        },
+        {
+          "name": "get_pod_logs",
+          "args": {
+            "container": "store",
+            "namespace": "kubesleuth-lab",
+            "pod_name": "session-store-85cd7b9bcd-bjwbf"
+          }
+        }
+      ],
+      "steps": 5,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:15:07.151523+00:00",
+  "rows": [
+    {
+      "scenario": "pvc-bad-storageclass",
+      "expected": "STORAGE",
+      "got": "MISSING_CONFIG_RESOURCE",
+      "category_ok": false,
+      "keyword_ok": false,
+      "duration_s": 7.9,
+      "tokens_in": 4875,
+      "tokens_out": 1876,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T06:52:24.144623+00:00",
+  "rows": [
+    {
+      "scenario": "crashloop-missing-env",
+      "expected": "MISSING_ENV_VAR",
+      "got": "APPLICATION_CRASH",
+      "category_ok": false,
+      "keyword_ok": true,
+      "duration_s": 29.1,
+      "tokens_in": 10962,
+      "tokens_out": 1886,
+      "error": null
+    }
+  ]
+}

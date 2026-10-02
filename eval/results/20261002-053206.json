@@ -1,0 +1,17 @@
+{
+  "model": "openai:gpt-oss-120b",
+  "date": "2026-10-02T05:32:06.706725+00:00",
+  "rows": [
+    {
+      "scenario": "crash-loop",
+      "expected": "APPLICATION_CRASH",
+      "got": null,
+      "category_ok": false,
+      "keyword_ok": false,
+      "duration_s": 5.9,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "error": "OpenAIRateLimitError: Error code: 429 - {'error': {'message': 'All models exhausted: 1 route checked (1 rate-limited or on cooldown). Add more API keys or wait for rate limits to reset. 4 models skipped: no key configured for their platform.', 'type': 'rate_limit_error', 'code': 'rate_limit_exceeded'}, 'execution_id': '9f73ad15-3247-4cc2-912f-9a6518cd5703'}"
+    }
+  ]
+}

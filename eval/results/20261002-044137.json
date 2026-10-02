@@ -1,0 +1,17 @@
+{
+  "model": "openai:openrouter/free",
+  "date": "2026-10-02T04:41:37.483045+00:00",
+  "rows": [
+    {
+      "scenario": "crash-loop",
+      "expected": "UNKNOWN",
+      "got": "UNKNOWN",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 41.0,
+      "tokens_in": 5575,
+      "tokens_out": 1825,
+      "error": null
+    }
+  ]
+}

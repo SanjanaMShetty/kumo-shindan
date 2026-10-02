@@ -32,6 +32,8 @@ spec:
             - secretRef:
                 name: {{ .Values.existingSecret }}
           env:
+            - name: ALLOWED_NAMESPACES
+              value: {{ join "," .Values.allowedNamespaces | quote }}
             - name: DB_PATH
               value: /data/kubesleuth.db
             - name: HOME

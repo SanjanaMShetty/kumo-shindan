@@ -1,0 +1,17 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:03:44.201631+00:00",
+  "rows": [
+    {
+      "scenario": "oomkilled",
+      "expected": "OOM_KILLED",
+      "got": "OOM_KILLED",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 13.4,
+      "tokens_in": 7566,
+      "tokens_out": 1689,
+      "error": null
+    }
+  ]
+}

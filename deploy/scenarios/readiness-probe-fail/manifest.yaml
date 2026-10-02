@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-api
+  namespace: kubesleuth-lab
+  labels: {app: inventory-api}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: inventory-api}
+  template:
+    metadata:
+      labels: {app: inventory-api}
+    spec:
+      containers:
+        - name: api
+          image: nginx:1.27
+          readinessProbe:
+            httpGet:
+              path: /healthz      # nginx returns 404 for this path
+              port: 80
+            periodSeconds: 5

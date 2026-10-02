@@ -49,7 +49,7 @@ def list_pods(namespace: str) -> str:
 
 @tool
 def get_pod_status(namespace: str, pod_name: str) -> str:
-    """Get a pod's phase, conditions, container states, and restart counts."""
+    """Get a pod's phase, conditions, container states, restart counts, node selector, and PVCs."""
     return _run_read_tool(k8s_tools.get_pod_status, namespace, pod_name)
 
 
@@ -77,4 +77,23 @@ def get_pod_logs(
     )
 
 
-ALL_TOOLS = [list_pods, get_pod_status, get_pod_events, get_pod_logs]
+@tool
+def get_pvc_status(namespace: str, pvc_name: str) -> str:
+    """Get a PersistentVolumeClaim's status, storage class, binding details, and events."""
+    return _run_read_tool(k8s_tools.get_pvc_status, namespace, pvc_name)
+
+
+@tool
+def get_service_endpoints(namespace: str, service_name: str) -> str:
+    """Inspect a Service selector and its ready and unready endpoint addresses."""
+    return _run_read_tool(k8s_tools.get_service_endpoints, namespace, service_name)
+
+
+ALL_TOOLS = [
+    list_pods,
+    get_pod_status,
+    get_pod_events,
+    get_pod_logs,
+    get_pvc_status,
+    get_service_endpoints,
+]

@@ -1,0 +1,17 @@
+{
+  "model": "openai:gemini-2.5-flash",
+  "date": "2026-10-02T05:17:51.267139+00:00",
+  "rows": [
+    {
+      "scenario": "crash-loop",
+      "expected": "APPLICATION_CRASH",
+      "got": null,
+      "category_ok": false,
+      "keyword_ok": false,
+      "duration_s": 0.7,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "error": "OpenAIModelNotFoundError: Error code: 404 - {'error': {'message': 'Every routed provider reports the model as not found or removed upstream (1 attempt(s)). The catalog entry looks stale; pick another model or call /v1/models for the available list. Attempt trail: google/gemini-2.5-flash key1: model_not_found. Last error: Google API error 404: This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (...', 'type': 'invalid_request_error', 'code': 'model_not_found'}, 'execution_id': '5b970ae1-180d-4c40-8996-0f255411b7ec'}"
+    }
+  ]
+}

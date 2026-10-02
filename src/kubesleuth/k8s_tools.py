@@ -73,6 +73,15 @@ def get_pod_status(namespace: str, pod_name: str) -> dict:
         "namespace": pod.metadata.namespace,
         "phase": pod.status.phase,
         "node": pod.spec.node_name,
+        "node_selector": pod.spec.node_selector or {},
+        "persistent_volume_claims": [
+            {
+                "volume": volume.name,
+                "claim": volume.persistent_volume_claim.claim_name,
+            }
+            for volume in pod.spec.volumes or []
+            if volume.persistent_volume_claim
+        ],
         "conditions": [
             {"type": condition.type, "status": condition.status, "reason": condition.reason}
             for condition in pod.status.conditions or []
@@ -140,3 +149,87 @@ def get_pod_logs(
         return f"[log retrieval error] {logs}"
 
     return logs
+
+
+def get_pvc_status(namespace: str, pvc_name: str) -> dict:
+    """Get a PVC's binding state, storage class, and related events."""
+    core = _api()
+    pvc = core.read_namespaced_persistent_volume_claim(
+        name=pvc_name,
+        namespace=namespace,
+    )
+    events = core.list_namespaced_event(
+        namespace=namespace,
+        field_selector=f"involvedObject.name={pvc_name}",
+    ).items
+
+    return {
+        "name": pvc.metadata.name,
+        "namespace": pvc.metadata.namespace,
+        "phase": pvc.status.phase,
+        "storage_class": pvc.spec.storage_class_name,
+        "volume_name": pvc.spec.volume_name,
+        "access_modes": pvc.spec.access_modes or [],
+        "requested_storage": (
+            pvc.spec.resources.requests.get("storage")
+            if pvc.spec.resources and pvc.spec.resources.requests
+            else None
+        ),
+        "capacity": pvc.status.capacity or {},
+        "conditions": [
+            {
+                "type": condition.type,
+                "status": condition.status,
+                "reason": condition.reason,
+                "message": condition.message,
+            }
+            for condition in pvc.status.conditions or []
+        ],
+        "events": [
+            {
+                "type": event.type,
+                "reason": event.reason,
+                "message": event.message,
+                "count": event.count,
+            }
+            for event in events
+        ],
+    }
+
+
+def get_service_endpoints(namespace: str, service_name: str) -> dict:
+    """Get a Service's selector, ports, and ready or unready endpoint addresses."""
+    core = _api()
+    service = core.read_namespaced_service(name=service_name, namespace=namespace)
+    endpoints = core.read_namespaced_endpoints(name=service_name, namespace=namespace)
+
+    return {
+        "name": service.metadata.name,
+        "namespace": service.metadata.namespace,
+        "selector": service.spec.selector or {},
+        "service_ports": [
+            {
+                "name": port.name,
+                "port": port.port,
+                "target_port": str(port.target_port),
+                "protocol": port.protocol,
+            }
+            for port in service.spec.ports or []
+        ],
+        "ready_endpoints": [
+            {
+                "ip": address.ip,
+                "pod": address.target_ref.name if address.target_ref else None,
+            }
+            for subset in endpoints.subsets or []
+            for address in subset.addresses or []
+        ],
+        "not_ready_endpoints": [
+            {
+                "ip": address.ip,
+                "pod": address.target_ref.name if address.target_ref else None,
+            }
+            for subset in endpoints.subsets or []
+            for address in subset.not_ready_addresses or []
+        ],
+    }

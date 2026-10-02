@@ -1,0 +1,17 @@
+{
+  "model": "openai:openrouter/free",
+  "date": "2026-10-02T04:37:26.977182+00:00",
+  "rows": [
+    {
+      "scenario": "image-pull-backoff",
+      "expected": "IMAGE_PULL",
+      "got": "IMAGE_PULL",
+      "category_ok": true,
+      "keyword_ok": true,
+      "duration_s": 98.4,
+      "tokens_in": 3111,
+      "tokens_out": 4718,
+      "error": null
+    }
+  ]
+}

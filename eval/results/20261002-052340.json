@@ -1,0 +1,17 @@
+{
+  "model": "openai:gemini-3.7-flash",
+  "date": "2026-10-02T05:23:40.181483+00:00",
+  "rows": [
+    {
+      "scenario": "crash-loop",
+      "expected": "APPLICATION_CRASH",
+      "got": null,
+      "category_ok": false,
+      "keyword_ok": false,
+      "duration_s": 8.2,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "error": "OpenAIRateLimitError: Error code: 429 - {'error': {'message': 'All models exhausted: 1 route checked (1 rate-limited or on cooldown). Add more API keys or wait for rate limits to reset. Soonest reset ~2m.', 'type': 'rate_limit_error', 'code': 'rate_limit_exceeded', 'retryAtMs': 1790918709785}, 'execution_id': '3bcca7f0-0379-4452-8c74-823cc08c02a8'}"
+    }
+  ]
+}

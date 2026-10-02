@@ -1,0 +1,17 @@
+{
+  "model": "openai:openai/gpt-oss-120b",
+  "date": "2026-10-02T07:04:26.855951+00:00",
+  "rows": [
+    {
+      "scenario": "pending-insufficient-cpu",
+      "expected": "INSUFFICIENT_RESOURCES",
+      "got": "SCHEDULING_CONSTRAINT",
+      "category_ok": false,
+      "keyword_ok": true,
+      "duration_s": 8.4,
+      "tokens_in": 3726,
+      "tokens_out": 1403,
+      "error": null
+    }
+  ]
+}
