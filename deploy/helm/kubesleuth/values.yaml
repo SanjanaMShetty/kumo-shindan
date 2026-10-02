@@ -1,0 +1,25 @@
+image:
+  repository: kubesleuth
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+allowedNamespaces:
+  - kubesleuth-lab
+
+existingSecret: kubesleuth-llm
+
+persistence:
+  size: 1Gi
+  storageClass: ""
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 768Mi
+
+# Enable this after the application exposes /metrics in Stage 10.
+metrics:
+  serviceMonitor:
+    enabled: false

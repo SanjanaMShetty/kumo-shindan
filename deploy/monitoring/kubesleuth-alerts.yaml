@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kubesleuth-lab-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: kubesleuth.lab
+      rules:
+        - alert: KubeSleuthImagePullBackOff
+          expr: |
+            kube_pod_container_status_waiting_reason{
+              namespace="kubesleuth-lab",
+              reason="ImagePullBackOff"
+            } == 1
+          for: 30s
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.pod }} cannot pull its image"
+            description: "Container {{ $labels.container }} in namespace {{ $labels.namespace }} is in ImagePullBackOff."
